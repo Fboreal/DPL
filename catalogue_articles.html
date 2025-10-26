@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Catalogue des articles</title>
+  <style>
+    :root {
+      font-family: "Segoe UI", Roboto, sans-serif;
+      background-color: #f7f7f7;
+      color: #333;
+    }
+
+    body {
+      margin: 0;
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      letter-spacing: 0.05em;
+    }
+
+    table {
+      width: min(100%, 960px);
+      margin: 0 auto;
+      border-collapse: collapse;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+      background-color: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    thead {
+      background: linear-gradient(135deg, #2c3e50, #4b79a1);
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    th, td {
+      padding: 1rem 1.25rem;
+      text-align: left;
+      border-bottom: 1px solid #e5e5e5;
+      vertical-align: middle;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f2f6fb;
+    }
+
+    img {
+      display: block;
+      width: 96px;
+      height: 96px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid rgba(76, 110, 245, 0.2);
+    }
+
+    .site {
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .code {
+      font-family: "Fira Code", "Courier New", monospace;
+      font-weight: 600;
+      color: #4b79a1;
+    }
+
+    caption {
+      caption-side: bottom;
+      padding: 1rem;
+      font-size: 0.95rem;
+      color: #666;
+    }
+
+    @media (max-width: 720px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tbody tr {
+        margin: 0 0 1.5rem 0;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+        background: #fff;
+      }
+
+      td {
+        border: none;
+        border-bottom: 1px solid #ececec;
+        position: relative;
+        padding-left: 55%;
+      }
+
+      td::before {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: 700;
+        color: #4b79a1;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+      }
+
+      td:nth-of-type(1) {
+        padding: 1.5rem;
+        text-align: center;
+      }
+
+      td:nth-of-type(2)::before { content: "Code"; }
+      td:nth-of-type(3)::before { content: "Désignation"; }
+      td:nth-of-type(4)::before { content: "Site"; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Catalogue des articles</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Photo</th>
+        <th>Code article</th>
+        <th>Désignation</th>
+        <th>Site de stockage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=200&q=60" alt="Perceuse sans fil"></td>
+        <td class="code">ELEC-PRC-001</td>
+        <td>Perceuse sans fil 18V avec deux batteries lithium-ion</td>
+        <td class="site">Entrepôt A1 - Allée 3, étagère B</td>
+      </tr>
+      <tr>
+        <td><img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=200&q=60" alt="Casque de chantier"></td>
+        <td class="code">SEC-CAS-014</td>
+        <td>Casque de chantier ventilé avec visière amovible</td>
+        <td class="site">Entrepôt B2 - Zone Sécurité</td>
+      </tr>
+      <tr>
+        <td><img src="https://images.unsplash.com/photo-1529429617124-aee818a67c5b?auto=format&fit=crop&w=200&q=60" alt="Gants de protection"></td>
+        <td class="code">SEC-GAN-032</td>
+        <td>Gants de protection anti-coupure niveau 5</td>
+        <td class="site">Entrepôt B2 - Zone EPI</td>
+      </tr>
+      <tr>
+        <td><img src="https://images.unsplash.com/photo-1517976547714-720226b65b93?auto=format&fit=crop&w=200&q=60" alt="Échelle télescopique"></td>
+        <td class="code">OUT-ECH-087</td>
+        <td>Échelle télescopique aluminium 4,5 m</td>
+        <td class="site">Entrepôt A3 - Allée 5, rack supérieur</td>
+      </tr>
+      <tr>
+        <td><img src="https://images.unsplash.com/photo-1560264418-c4445382edbc?auto=format&fit=crop&w=200&q=60" alt="Ruban de signalisation"></td>
+        <td class="code">SEC-RUB-055</td>
+        <td>Ruban de signalisation rouge et blanc (rouleau 100 m)</td>
+        <td class="site">Entrepôt B2 - Zone Signalétique</td>
+      </tr>
+      <tr>
+        <td><img src="https://images.unsplash.com/photo-1518131678677-a1c075d889be?auto=format&fit=crop&w=200&q=60" alt="Boîte de visserie"></td>
+        <td class="code">FIX-VIS-210</td>
+        <td>Assortiment de vis à bois acier zingué (500 pièces)</td>
+        <td class="site">Entrepôt A1 - Allée 2, étagère D</td>
+      </tr>
+    </tbody>
+    <caption>Catalogue interne des articles avec informations de stockage mises à jour le 1er mars 2024.</caption>
+  </table>
+</body>
+</html>
