@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Catalogue des articles</title>
+  <style>
+    :root {
+      font-family: "Segoe UI", Roboto, sans-serif;
+      background-color: #f7f7f7;
+      color: #333;
+    }
+
+    body {
+      margin: 0;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 0;
+      letter-spacing: 0.05em;
+    }
+
+    .catalogue-wrapper {
+      width: min(100%, 1024px);
+      display: grid;
+      gap: 2rem;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 14px 32px rgba(44, 62, 80, 0.12);
+      padding: 1.75rem;
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #4b79a1;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem 1rem;
+      align-items: end;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    input, textarea, select {
+      font: inherit;
+      padding: 0.75rem 0.9rem;
+      border: 1px solid #d0d6e0;
+      border-radius: 10px;
+      background-color: #f9fbff;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #4b79a1;
+      box-shadow: 0 0 0 3px rgba(75, 121, 161, 0.25);
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    button {
+      font: inherit;
+      padding: 0.75rem 1.25rem;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    button.primary {
+      background: linear-gradient(135deg, #2c3e50, #4b79a1);
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(75, 121, 161, 0.35);
+    }
+
+    button.secondary {
+      background-color: #e9edf5;
+      color: #2c3e50;
+      box-shadow: 0 6px 14px rgba(44, 62, 80, 0.15);
+    }
+
+    button.danger {
+      background: linear-gradient(135deg, #c31432, #89253e);
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(137, 37, 62, 0.35);
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+      background-color: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    thead {
+      background: linear-gradient(135deg, #2c3e50, #4b79a1);
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    th, td {
+      padding: 1rem 1.25rem;
+      text-align: left;
+      border-bottom: 1px solid #e5e5e5;
+      vertical-align: middle;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:nth-child(even) {
+      background-color: #f2f6fb;
+    }
+
+    img {
+      display: block;
+      width: 96px;
+      height: 96px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid rgba(76, 110, 245, 0.2);
+    }
+
+    .site {
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    .code {
+      font-family: "Fira Code", "Courier New", monospace;
+      font-weight: 600;
+      color: #4b79a1;
+    }
+
+    caption {
+      caption-side: bottom;
+      padding: 1rem;
+      font-size: 0.95rem;
+      color: #666;
+    }
+
+    .table-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 2rem;
+      color: #4b79a1;
+      font-weight: 600;
+    }
+
+    @media (max-width: 720px) {
+      form {
+        grid-template-columns: 1fr;
+      }
+
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tbody tr {
+        margin: 0 0 1.5rem 0;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+        background: #fff;
+      }
+
+      td {
+        border: none;
+        border-bottom: 1px solid #ececec;
+        position: relative;
+        padding-left: 55%;
+      }
+
+      td::before {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: 700;
+        color: #4b79a1;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+      }
+
+      td:nth-of-type(1) {
+        padding: 1.5rem;
+        text-align: center;
+      }
+
+      td:nth-of-type(2)::before { content: "Code"; }
+      td:nth-of-type(3)::before { content: "Désignation"; }
+      td:nth-of-type(4)::before { content: "Site"; }
+      td:nth-of-type(5)::before { content: "Actions"; }
+
+      .table-actions {
+        justify-content: center;
+        padding: 1rem 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Catalogue des articles</h1>
+
+  <div class="catalogue-wrapper">
+    <section class="card" aria-labelledby="form-title">
+      <h2 id="form-title">Ajouter ou modifier un article</h2>
+      <form id="article-form">
+        <label>
+          Code article
+          <input id="code" name="code" type="text" placeholder="Ex. ELEC-PRC-001" required>
+        </label>
+        <label>
+          Désignation
+          <input id="designation" name="designation" type="text" placeholder="Description de l'article" required>
+        </label>
+        <label>
+          Site de stockage
+          <input id="site" name="site" type="text" placeholder="Entrepôt, allée, étagère" required>
+        </label>
+        <label>
+          URL de la photo
+          <input id="photo" name="photo" type="url" placeholder="https://exemple.com/image.jpg" required>
+        </label>
+        <div class="actions">
+          <button type="submit" class="primary" id="submit-button">Ajouter l'article</button>
+          <button type="button" class="secondary" id="cancel-edit" hidden>Annuler la modification</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card" aria-labelledby="list-title">
+      <h2 id="list-title">Liste des articles</h2>
+      <table aria-describedby="table-caption">
+        <thead>
+          <tr>
+            <th scope="col">Photo</th>
+            <th scope="col">Code</th>
+            <th scope="col">Désignation</th>
+            <th scope="col">Site</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="articles-body">
+          <tr class="empty-state" aria-live="polite">
+            <td colspan="5">Aucun article pour le moment. Ajoutez votre premier article !</td>
+          </tr>
+        </tbody>
+        <caption id="table-caption">Gérez vos articles : ajoutez, modifiez ou supprimez-les en toute simplicité.</caption>
+      </table>
+    </section>
+  </div>
+
+  <template id="article-row-template">
+    <tr>
+      <td>
+        <img data-role="photo" alt="Photo de l'article">
+      </td>
+      <td class="code" data-role="code"></td>
+      <td data-role="designation"></td>
+      <td class="site" data-role="site"></td>
+      <td>
+        <div class="table-actions">
+          <button type="button" class="secondary" data-action="edit">Modifier</button>
+          <button type="button" class="danger" data-action="delete">Supprimer</button>
+        </div>
+      </td>
+    </tr>
+  </template>
+
+  <script>
+    const form = document.getElementById('article-form');
+    const submitButton = document.getElementById('submit-button');
+    const cancelButton = document.getElementById('cancel-edit');
+    const tbody = document.getElementById('articles-body');
+    const template = document.getElementById('article-row-template');
+
+    const createId = () => (
+      typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
+        ? crypto.randomUUID()
+        : `id-${Date.now()}-${Math.random().toString(16).slice(2)}`
+    );
+
+    let articles = [
+      {
+        id: createId(),
+        code: 'ELEC-PRC-001',
+        designation: 'Perceuse sans fil 18V avec deux batteries lithium-ion',
+        site: 'Entrepôt A1 - Allée 3, étagère B',
+        photo: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=200&q=60'
+      },
+      {
+        id: createId(),
+        code: 'SEC-CAS-014',
+        designation: 'Casque de chantier ventilé avec visière amovible',
+        site: 'Entrepôt B2 - Zone Sécurité',
+        photo: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=200&q=60'
+      },
+      {
+        id: createId(),
+        code: 'SEC-GAN-032',
+        designation: 'Gants de protection anti-coupure niveau 5',
+        site: 'Entrepôt B2 - Zone EPI',
+        photo: 'https://images.unsplash.com/photo-1529429617124-aee818a67c5b?auto=format&fit=crop&w=200&q=60'
+      },
+      {
+        id: createId(),
+        code: 'LEV-CRT-021',
+        designation: 'Chariot élévateur électrique 2,5T',
+        site: 'Entrepôt A3 - Quai 5',
+        photo: 'https://images.unsplash.com/photo-1542367594-32c5164fd489?auto=format&fit=crop&w=200&q=60'
+      }
+    ];
+
+    let editingId = null;
+
+    function renderArticles() {
+      tbody.innerHTML = '';
+
+      if (articles.length === 0) {
+        const emptyRow = document.createElement('tr');
+        emptyRow.className = 'empty-state';
+        const emptyCell = document.createElement('td');
+        emptyCell.colSpan = 5;
+        emptyCell.textContent = 'Aucun article pour le moment. Ajoutez votre premier article !';
+        emptyRow.appendChild(emptyCell);
+        tbody.appendChild(emptyRow);
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+
+      for (const article of articles) {
+        const row = template.content.firstElementChild.cloneNode(true);
+        row.dataset.id = article.id;
+        const photo = row.querySelector('[data-role="photo"]');
+        photo.src = article.photo;
+        photo.alt = `Photo de ${article.designation}`;
+        row.querySelector('[data-role="code"]').textContent = article.code;
+        row.querySelector('[data-role="designation"]').textContent = article.designation;
+        row.querySelector('[data-role="site"]').textContent = article.site;
+        fragment.appendChild(row);
+      }
+
+      tbody.appendChild(fragment);
+    }
+
+    function resetForm() {
+      form.reset();
+      editingId = null;
+      submitButton.textContent = "Ajouter l'article";
+      cancelButton.hidden = true;
+      form.querySelector('#code').focus();
+    }
+
+    function getArticleFromForm() {
+      const formData = new FormData(form);
+      const cleanedEntries = Array.from(formData.entries(), ([key, value]) => [
+        key,
+        value.trim()
+      ]);
+      return Object.fromEntries(cleanedEntries);
+    }
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const articleData = getArticleFromForm();
+
+      if (editingId) {
+        articles = articles.map((article) =>
+          article.id === editingId ? { ...article, ...articleData } : article
+        );
+      } else {
+        articles = [
+          {
+            id: createId(),
+            ...articleData
+          },
+          ...articles
+        ];
+      }
+
+      renderArticles();
+      resetForm();
+    });
+
+    cancelButton.addEventListener('click', resetForm);
+
+    tbody.addEventListener('click', (event) => {
+      const button = event.target.closest('button');
+      if (!button) return;
+
+      const row = button.closest('tr');
+      const id = row.dataset.id;
+
+      if (button.dataset.action === 'delete') {
+        articles = articles.filter((article) => article.id !== id);
+        if (editingId === id) {
+          resetForm();
+        }
+        renderArticles();
+        return;
+      }
+
+      if (button.dataset.action === 'edit') {
+        const article = articles.find((item) => item.id === id);
+        if (!article) return;
+
+        form.code.value = article.code;
+        form.designation.value = article.designation;
+        form.site.value = article.site;
+        form.photo.value = article.photo;
+
+        editingId = id;
+        submitButton.textContent = 'Mettre à jour';
+        cancelButton.hidden = false;
+        form.code.focus();
+      }
+    });
+
+    renderArticles();
+  </script>
+</body>
+</html>
